@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  metadata-server:
+    image: hochstenbach/metadata-server:v0.0.2
+    container_name: metadata-server
+    ports:
+      - "3001:3001"
+    depends_on:
+      - zotero
+    networks:
+      - app-network
+
+  zotero:
+    image: zotero/translation-server:2.0.6
+    container_name: zotero-translator
+    ports:
+      - "1969:1969"
+    networks:
+      - app-network
+
+  wiki:
+    image: hochstenbach/wiki-server:v0.0.1
+    container_name: wiki-server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+  
+  postgres:
+    image: postgres
+    container_name: postgres-server
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+
+  eventlog-server:
+    image: hochstenbach/eventlog-server:v0.0.1
+    container_name: eventlog-service
+    environment:
+      POSTGRES_HOST: host.docker.internal
+    depends_on:
+      - postgres
+    ports:
+      - 3006:3006
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:

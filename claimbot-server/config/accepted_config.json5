@@ -31,7 +31,7 @@
                 "target": {
                   "id": "http://host.docker.internal:3001/profile/card#me",
                   "name": "Metadata Service",
-                  "inbox": "http://host.docker.internal:3001:/inbox/",
+                  "inbox": "http://host.docker.internal:3001/inbox/",
                   "type": "Service"
                 }
               }

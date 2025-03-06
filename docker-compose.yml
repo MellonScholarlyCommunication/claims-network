@@ -71,11 +71,11 @@ services:
     networks:
       - app-network
     volumes:
+      - ./claimbot-service/config:/app/config
       - ./claimbot-service/accepted:/app/accepted
       - ./claimbox-service/error:/app/error
       - ./claimbot-service/inbox:/app/inbox
       - ./claimbot-service/outbox:/app/outbox
-      - ./claimbox-service/config:/app/config
 
 networks:
   app-network:

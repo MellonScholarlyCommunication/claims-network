@@ -1,0 +1,160 @@
+{
+    "notification_handler": {
+        "multi": {
+          // Handlers for the inbox
+          "handlers": [
+            // Handler for the Announce from the metadata server
+            [
+              // Only Announce(s) from the Metadata server
+              { 
+                "id": "@handler/notification_handler/jsonpath_filter.js",
+                "anyOf": [ 
+                    [ 
+                        { "path": "$.type" , "value": "Announce" } ,
+                        { "path": "$.origin.id" , "value": "http://host.docker.internal:3001/profile/card#me" }
+                    ]
+                ]
+              },
+              // Check if we have a known inReplyTo document
+              { 
+                "id": "./handler/valid_inreplyto.js",
+              },
+              // Restore the original notification from the cache
+              {
+                "id": "./handler/restore_orginal_notification.js"
+              },
+              // Restore the researcher profile
+              {
+                "id": "./handler/restore_researcher_profile.js"
+              },
+              // From here if something goes wrong move it to the errors
+              {
+                "id": "@handler/notification_handler/on_error.js",
+                "handler": {
+                  "id": "./handler/move.js",
+                  "to": "./error" 
+                }
+              },
+              // Cache this notification for later use
+              {
+                "id": "./handler/notification_cache.js"
+              },
+              // Create a html citation from the service result
+              {
+                "id": "./handler/create_html_citation.js"
+              },
+              // Update the wikijs
+              {
+                "id": "./handler/update_wiki.js",
+                "$lock": true
+              },
+              // Generate a event notification to update the researcher profile update also
+              // (Should be a real one later it the project?)
+              { 
+                "id": "./handler/generate_wiki_offer.js" ,
+                "actor": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Mastodon Bot",
+                  "inbox": "http://host.docker.internal:3002/service/m/inbox/",
+                  "type": "Service"
+                } ,
+                "target": {
+                  "id": "http://host.docker.internal:3000/profile/card#me",
+                  "name": "Wiki.JS",
+                  "inbox": "http://host.docker.internal:3000/inbox/",
+                  "type": "Service"
+                }
+              },
+              // Generate a event notification for the researcher profile update also
+              // (Should be a real one later it the project?)
+              { 
+                "id": "./handler/generate_wiki_announce.js" ,
+                "actor": {
+                  "id": "http://host.docker.internal:3000/profile/card#me",
+                  "name": "Wiki.JS",
+                  "inbox": "http://host.docker.internal:3000/inbox/",
+                  "type": "Service"
+                } ,
+                "target": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Mastodon Bot",
+                  "inbox": "http://host.docker.internal:3002/inbox/",
+                  "type": "Service"
+                }
+              },
+              // Send a happy toot to the user
+              {
+                "id": "./handler/send_toot.js"
+              },
+              // Generate a event notification for this toot also
+              // (Should be a real one later it the project?)
+              { 
+                "id": "./handler/generate_toot_announce.js" ,
+                "actor": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Mastodon Bot",
+                  "inbox": "http://host.docker.internal:3002/inbox/",
+                  "type": "Service"
+                }
+              }
+            ] ,
+            // Move the Reject to error for now
+            [
+              // Only Announce(s) from the Metadata server
+              { 
+                "id": "@handler/notification_handler/jsonpath_filter.js",
+                "anyOf": [ 
+                    [ 
+                        { "path": "$.type" , "value": "Reject" } ,
+                        { "path": "$.origin.id" , "value": "http://host.docker.internal:3001/profile/card#me" }
+                    ]
+                ]
+              },
+              // Check if we have a known inReplyTo document
+              { 
+                "id": "./handler/valid_inreplyto.js",
+              },
+              // Restore the original notification from the cache
+              {
+                "id": "./handler/restore_orginal_notification.js"
+              },
+              // Cache this notification for later use
+              {
+                "id": "./handler/notification_cache.js"
+              },
+              // Restore the researcher profile
+              {
+                "id": "./handler/restore_researcher_profile.js"
+              },
+              // Create a toot for failed metadata lookups
+              {
+                "id": "./handler/metadata_failed_toot.js"
+              },
+              // Send a sad toot to the user 
+              {
+                "id": "./handler/send_toot.js"
+              },
+              // Generate a event notification for this toot also
+              { 
+                "id": "./handler/generate_toot_announce.js" ,
+                "actor": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Mastodon Bot",
+                  "inbox": "http://host.docker.internal:3002/inbox/",
+                  "type": "Service"
+                }
+              },
+              // Move the failed notification to error
+              {
+                "id": "./handler/move.js",
+                "to": "./error"
+              }
+            ],
+            // Always remote .meta files at the end of a workflow
+            [
+              "./handler/remove_meta.js"
+            ]
+          ]
+        }
+    }
+}

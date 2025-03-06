@@ -46,9 +46,29 @@ services:
     depends_on:
       - postgres
     ports:
-      - 3006:3006
+      - 3003:3003
     networks:
       - app-network
+
+  claimbot-server:
+    image: hochstenbach/claimbot-server:v0.0.1
+    container_name: claimbot-service
+    environment:
+      MASTODON_URL: https://mas.to
+      MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
+      WIKIJS_URL: http://host.docker.internal:3000/graphql
+      WIKIJS_ACCESS_TOKEN: ${WIKIJS_ACCESS_TOKEN}
+      POSTGRES_HOST: host.docker.internal
+    depends_on:
+      - eventlog-service
+    ports:
+      - 3002:3002
+    networks:
+      - app-network
+    volumes:
+      - ./claimbot/accepted:/app/accepted
+      - ./claimbot/inbox:/app/inbox
+      - ./claimbot/outbox:/app/outbox
 
 networks:
   app-network:

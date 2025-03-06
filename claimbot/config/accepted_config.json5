@@ -1,0 +1,46 @@
+{
+    "notification_handler": {
+        "multi": {
+          // Handlers for the inbox
+          "handlers": [
+            // Handler for accepted Mastodon toots
+            [
+              // Only Announce(s) from the Mastodon Bot
+              { 
+                "id": "@handler/notification_handler/jsonpath_filter.js",
+                "anyOf": [ 
+                    [ 
+                        { "path": "$.type" , "value": "Announce" } ,
+                        { "path": "$.origin.id" , "value": "http://host.docker.internal:3002/profile/card#me" }
+                    ]
+                ]
+              },
+              // Cache this notification for later use
+              {
+                "id": "./handler/notification_cache.js"
+              },
+              // Request the lookup of the metadata for object.url(s) in the Announce
+              { 
+                "id": "./handler/metadata_lookup.js" ,
+                "actor": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Mastodon Bot",
+                  "inbox": "http://host.docker.internal:3000/inbox/",
+                  "type": "Service"
+                },
+                "target": {
+                  "id": "http://host.docker.internal:3001/profile/card#me",
+                  "name": "Metadata Service",
+                  "inbox": "http://host.docker.internal:3001:/inbox/",
+                  "type": "Service"
+                }
+              }
+            ],
+            // Always remote .meta files at the end of a workflow
+            [
+              "./handler/remove_meta.js"
+            ]
+          ]
+        }
+    }
+}

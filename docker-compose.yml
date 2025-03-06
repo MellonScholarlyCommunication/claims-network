@@ -66,9 +66,10 @@ services:
     networks:
       - app-network
     volumes:
-      - ./claimbot/accepted:/app/accepted
-      - ./claimbot/inbox:/app/inbox
-      - ./claimbot/outbox:/app/outbox
+      - ./claimbot-service/accepted:/app/accepted
+      - ./claimbot-service/inbox:/app/inbox
+      - ./claimbot-service/outbox:/app/outbox
+      - ./claimbox-service/config:/app/config
 
 networks:
   app-network:

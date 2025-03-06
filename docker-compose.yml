@@ -10,6 +10,11 @@ services:
       - zotero
     networks:
       - app-network
+    volumes:
+      - ./metadata-server/config:/app/config
+      - ./metadata-server/error:/app/error
+      - ./metadata-server/inbox:/app/inbox
+      - ./metadata-server/outbox:/app/outbox
 
   zotero:
     image: zotero/translation-server:2.0.6
@@ -40,7 +45,7 @@ services:
 
   eventlog-server:
     image: hochstenbach/eventlog-server:v0.0.1
-    container_name: eventlog-service
+    container_name: eventlog-server
     environment:
       POSTGRES_HOST: host.docker.internal
     depends_on:
@@ -52,7 +57,7 @@ services:
 
   claimbot-server:
     image: hochstenbach/claimbot-server:v0.0.1
-    container_name: claimbot-service
+    container_name: claimbot-server
     environment:
       MASTODON_URL: https://mas.to
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
@@ -60,13 +65,14 @@ services:
       WIKIJS_ACCESS_TOKEN: ${WIKIJS_ACCESS_TOKEN}
       POSTGRES_HOST: host.docker.internal
     depends_on:
-      - eventlog-service
+      - eventlog-server
     ports:
       - 3002:3002
     networks:
       - app-network
     volumes:
       - ./claimbot-service/accepted:/app/accepted
+      - ./claimbox-service/error:/app/error
       - ./claimbot-service/inbox:/app/inbox
       - ./claimbot-service/outbox:/app/outbox
       - ./claimbox-service/config:/app/config

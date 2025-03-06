@@ -1,0 +1,34 @@
+{
+    "notification_handler": {
+        "multi": {
+            "handlers": [
+                [
+                 { 
+                    "id": "@handler/notification_handler/jsonpath_filter.js",
+                    "anyOf": [ 
+                        [ 
+                            { "path": "$.type" , "value": "Offer" } 
+                        ]
+                    ]
+                 },
+                 "./handler/zotero_lookup.js",
+                 {
+                    "id": "./handler/announce_result.js",
+                    "actor": {
+                        "id": "http://host.docker.internal:3001/profile/card#me",
+                        "name": "Metadata Service Provider",
+                        "inbox": "http://host.docker.internal:3001/inbox/",
+                        "type": "Service"
+                    },
+                    "origin": {
+                        "id": "http://host.docker.internal:3001/profile/card#me",
+                        "name": "Metadata Service Provider",
+                        "inbox": "http://host.docker.internal:3001/inbox/",
+                        "type": "Service"
+                    } 
+                 }
+                ]
+            ]
+        }
+    }
+}

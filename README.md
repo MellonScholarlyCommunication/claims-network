@@ -12,10 +12,10 @@ The zotero translation server is available at http://localhost:1969.
 
 ## Web interface
 
+- Dashboard : http://localhost (and Eventlog service)
 - Claims service: http://localhost:3000
 - Metadata service: http://localhost:3001
 - Claimbot service: http://localhost:3002
-- Eventlog service: http://localhost:3003
 
 ## Export the claims
 

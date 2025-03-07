@@ -24,7 +24,7 @@
                 "id": "./handler/metadata_lookup.js" ,
                 "actor": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
-                  "name": "Mastodon Bot",
+                  "name": "Claim Bot",
                   "inbox": "http://host.docker.internal:3002/inbox/",
                   "type": "Service"
                 },

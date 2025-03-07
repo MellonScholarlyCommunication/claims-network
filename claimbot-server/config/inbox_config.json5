@@ -54,7 +54,7 @@
                 "id": "./handler/generate_wiki_offer.js" ,
                 "actor": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
-                  "name": "Mastodon Bot",
+                  "name": "Claim Bot",
                   "inbox": "http://host.docker.internal:3002/service/m/inbox/",
                   "type": "Service"
                 } ,
@@ -77,7 +77,7 @@
                 } ,
                 "target": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
-                  "name": "Mastodon Bot",
+                  "name": "Claim Bot",
                   "inbox": "http://host.docker.internal:3002/inbox/",
                   "type": "Service"
                 }
@@ -92,7 +92,7 @@
                 "id": "./handler/generate_toot_announce.js" ,
                 "actor": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
-                  "name": "Mastodon Bot",
+                  "name": "Claim Bot",
                   "inbox": "http://host.docker.internal:3002/inbox/",
                   "type": "Service"
                 }
@@ -139,7 +139,7 @@
                 "id": "./handler/generate_toot_announce.js" ,
                 "actor": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
-                  "name": "Mastodon Bot",
+                  "name": "Claim Bot",
                   "inbox": "http://host.docker.internal:3002/inbox/",
                   "type": "Service"
                 }

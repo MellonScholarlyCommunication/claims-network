@@ -1,0 +1,29 @@
+{
+    "@context": "https://www.w3.org/ns/activitystreams",
+    "id": "urn:uuid:6d21a2ae-df59-40d9-999c-18e19277d21a",
+    "type": "Announce",
+    "published": "2024-08-02T06:45:54.000Z",
+    "actor": {
+      "id": "https://mastodon.social/@patrickhochstenbach",
+      "name": "patrickhochstenbach",
+      "inbox": "https://mastodon.social/users/patrickhochstenbach/inbox",
+      "type": "Person"
+    },
+    "origin": {
+      "id": "http://host.docker.internal:3002/profile/card#me",
+      "name": "Mastodon Bot",
+      "inbox": "http://host.docker.internal:3002/inbox/",
+      "type": "Service"
+    },
+    "object": {
+      "id": "https://mastodon.social/@patrickhochstenbach/112891078566219289",
+      "content": "https://doi.org/10.5117/CCR2024.1.1.DEBR",
+      "url": [
+        {
+          "type": "Link",
+          "href": "https://doi.org/10.5117/CCR2024.1.1.DEBR"
+        }
+      ],
+      "type": "Note"
+    }
+  }

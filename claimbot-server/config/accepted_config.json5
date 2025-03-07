@@ -25,7 +25,7 @@
                 "actor": {
                   "id": "http://host.docker.internal:3002/profile/card#me",
                   "name": "Mastodon Bot",
-                  "inbox": "http://host.docker.internal:3000/inbox/",
+                  "inbox": "http://host.docker.internal:3002/inbox/",
                   "type": "Service"
                 },
                 "target": {

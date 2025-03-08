@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        />
+        <link
+	    rel="me"
+	    href="https://research.test.edu.nl/@alsvanounds"/>
+        <link
+	    rel="me"
+	    href="http://localhost:3000/researcher/orcid/0000-0000-0000-0010"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="application/ld+json" id="data">
+{
+    "@context": "https://labs.eventnotifications.net/contexts/profile.jsonld",
+    "id": "http://localhost/profile/9000.html",
+    "type": "PersonalProfileDocument",
+    "primaryTopic": {
+        "id": "http://localhost/profile/9000.html#me",
+        "type": "Person",
+        "mastodon": "https://research.test.edu.nl/@alsvanounds",
+        "homepage": "http://localhost:3000/researcher/orcid/0000-0000-0000-0010",
+        "modified": "2025-03-08T13:10:51Z"
+    }
+}
+        </script>
+    </head>
+    <body>
+        <main class="container">
+            <h1>Verification Service Demo</h1>
+
+            <b id="topic"></b>
+
+            <hr/>
+
+            <div class="data-field" id="mastodon"></div>
+            <div class="data-field" id="homepage"></div>
+            <div class="data-field" id="modified"></div>
+
+            <script type="text/javascript" src="../js/script.js"></script>
+        </main>
+    </body>
+</html>

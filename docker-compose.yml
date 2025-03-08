@@ -73,6 +73,7 @@ services:
     networks:
       - app-network
     volumes:
+      - ./claimbot-server/config/ecosystem.config.js:/app/ecosystem.config.js
       - ./claimbot-server/config:/app/config
       - ./claimbot-server/accepted:/app/accepted
       - ./claimbot-server/error:/app/error

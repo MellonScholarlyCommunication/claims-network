@@ -17,6 +17,10 @@ The zotero translation server is available at http://localhost:1969.
 - Metadata service: http://localhost:3001
 - Claimbot service: http://localhost:3002
 
+## Generate a claim via the command line
+
+./mastodon.sh generate "https://nos.nl/artikel/2558648-kabinet-lobbyt-voor-nederlandse-vervanger-van-russische-kunstmest"
+
 ## Export the claims
 
 docker run --rm hochstenbach/rdf-generator:v0.0.1

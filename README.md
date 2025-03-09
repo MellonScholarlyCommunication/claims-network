@@ -6,10 +6,6 @@
 docker compose up -d 
 ```
 
-The metadata-server is now available at http://localhost:3001.
-
-The zotero translation server is available at http://localhost:1969.
-
 ## Web interface
 
 - Dashboard : http://localhost 

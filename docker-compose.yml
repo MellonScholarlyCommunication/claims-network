@@ -60,11 +60,12 @@ services:
     container_name: claimbot-server
     environment:
       DEMO_MODE: NO_TOOTS
-      DEMO_PROFILE: http://host.docker.internal:3000/researcher/orcid/0000-0000-0000-0010
       MASTODON_URL: https://mas.to
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
-      WIKIJS_URL: http://host.docker.internal:3000/graphql
+      WIKIJS_URL: http://host.docker.internal:3000
       WIKIJS_ACCESS_TOKEN: ${WIKIJS_ACCESS_TOKEN}
+      VERIFICATION_URL: http://host.docker.internal
+      VERIFICATION: loose
       POSTGRES_HOST: host.docker.internal
     depends_on:
       - eventlog-server

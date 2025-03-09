@@ -1,1 +1,8 @@
 .env
+claimbot-server/accepted/** 
+claimbot-server/error/**
+claimbot-server/inbox/**
+claimbot-server/outbox/**
+metadata-server/error/** 
+metadata-server/inbox/** 
+metadata-server/outbox/** 

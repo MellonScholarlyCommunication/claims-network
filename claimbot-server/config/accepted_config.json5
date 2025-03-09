@@ -15,6 +15,22 @@
                     ]
                 ]
               },
+              // Check if the actor has a researcher profile
+              {
+                "id": "./handler/valid_researcher_profile.js",
+                "actor": {
+                  "id": "http://host.docker.internal:3002/profile/card#me",
+                  "name": "Claim Bot",
+                  "inbox": "http://host.docker.internal:3002/inbox/",
+                  "type": "Service"
+                },
+                "target": {
+                  "id": "http://localhost/profile/",
+                  "name": "Verification Service",
+                  "inbox": "http://localhost/profile/inbox/",
+                  "type": "Service"
+                }
+              },
               // Cache this notification for later use
               {
                 "id": "./handler/notification_cache.js"

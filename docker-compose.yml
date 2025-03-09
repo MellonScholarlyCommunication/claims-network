@@ -60,7 +60,7 @@ services:
     container_name: claimbot-server
     environment:
       DEMO_MODE: NO_TOOTS
-      MASTODON_URL: https://mas.to
+      MASTODON_URL: ${MASTODON_URL}
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
       WIKIJS_URL: http://host.docker.internal:3000
       WIKIJS_ACCESS_TOKEN: ${WIKIJS_ACCESS_TOKEN}

@@ -17,7 +17,7 @@ services:
       - ./metadata-server/outbox:/app/outbox
 
   zotero:
-    image: zotero/translation-server:2.0.6
+    image: hochstenbach/zotero-server:v0.0.1
     container_name: zotero-translator
     ports:
       - "1969:1969"

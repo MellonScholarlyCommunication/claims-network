@@ -6,3 +6,4 @@ claimbot-server/outbox/**
 metadata-server/error/** 
 metadata-server/inbox/** 
 metadata-server/outbox/** 
+export.jsonld

@@ -6,6 +6,9 @@ demo1:
 demo2:
 	cp ./data/demo2.jsonld ./claimbot-server/accepted
 
+rdf:
+	docker run --rm hochstenbach/rdf-generator:v0.0.1 > export.jsonld
+	
 clean:
 	find ./claimbot-server/accepted -type f -exec rm {} \;
 	find ./claimbot-server/error -type f -exec rm {} \;

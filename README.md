@@ -3,7 +3,7 @@
 ## Run Docker Compose
 
 ```
-docker compose up -d 
+make start
 ```
 
 ## Web interface
@@ -25,6 +25,6 @@ docker run --rm hochstenbach/rdf-generator:v0.0.1
 ## Stop Docker Compose
 
 ```
-docker compose down
+make stop
 ```
 

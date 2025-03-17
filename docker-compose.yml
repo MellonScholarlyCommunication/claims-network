@@ -15,7 +15,23 @@ services:
       - ./metadata-server/error:/app/error
       - ./metadata-server/inbox:/app/inbox
       - ./metadata-server/outbox:/app/outbox
+    profiles:
+      - metadata
 
+  archiver-server:
+    image: hochstenbach/archiver-server:v0.0.1
+    container_name: archiver-server
+    ports:
+      - "3006:3006"
+    networks:
+      - app-network
+    volumes:
+      - ./archiver-server/error:/app/error
+      - ./archiver-server/inbox:/app/inbox
+      - ./archiver-server/tmp:/app/tmp
+    profiles:
+      - archiver
+    
   zotero:
     image: hochstenbach/zotero-server:v0.0.1
     container_name: zotero-translator
@@ -23,6 +39,8 @@ services:
       - "1969:1969"
     networks:
       - app-network
+    profiles: 
+      - base
 
   wiki:
     image: hochstenbach/wiki-server:v0.0.1
@@ -31,7 +49,9 @@ services:
       - "3000:3000"
     networks:
       - app-network
-  
+    profiles:
+      - base
+
   postgres:
     image: postgres
     container_name: postgres-server
@@ -42,6 +62,8 @@ services:
       POSTGRES_USER: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data 
+    profiles:
+      - base
 
   eventlog-server:
     image: hochstenbach/eventlog-server:v0.0.1
@@ -80,6 +102,8 @@ services:
       - ./claimbot-server/error:/app/error
       - ./claimbot-server/inbox:/app/inbox
       - ./claimbot-server/outbox:/app/outbox
+    profiles:
+      - claimbot
 
   proxy-server:
     image: nginx:alpine
@@ -93,6 +117,8 @@ services:
       - eventlog-server
     networks:
       - app-network 
+    profiles:
+      - base
 
 networks:
   app-network:

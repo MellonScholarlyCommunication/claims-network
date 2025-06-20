@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="javascript/import_claims.js"></script>
+        <style type="text/css">
+            .claim-item {
+                margin-bottom: 8px;
+            }
+            #template {  
+                font-family: Monospace;  
+                font-size: 12px;   
+            }
+            #include {
+                margin-top: 15px;
+            }
+        </style>
+        <title>ClaimLog Service</title>
+    </head>
+    <body>
+        <main class="container">
+            <h1>ClaimLog Service</h1>
+
+            <form id="myForm">
+                <fieldset>
+                    <label>
+                    Enter your Mastodon profile URL:
+                    <input
+                        name="artifact"
+                        value="https://research.test.edu.nl/@alsvanounds"
+                        placeholder="Profile"
+                    />
+                    </label>
+                </fieldset>
+                <input type="submit"/>
+            </form>
+
+            <div id="claims"></div>
+
+            <div id="include"></div>
+
+            <h2>Source Code</h2>
+
+            <a href="https://github.com/MellonScholarlyCommunication/rdf-generator">https://github.com/MellonScholarlyCommunication/rdf-generator</a>
+        </main>
+        <script>
+ $(document).ready(function() {
+    $("#myForm").on("submit", async function(event) {
+      event.preventDefault(); 
+      const artifactValue = $('input[name="artifact"]').val();
+      const claims = await fetchClaims(artifactValue);
+      const thisClaimUrl = claimUrl(artifactValue);
+      $('#claims').html('');
+      $('#include').html('');
+      if (claims) {
+         $('#claims').append('<h3>Claims</h3>');
+         for (let i = 0 ; i < claims.length ; i++) {
+            $('#claims').append(
+                "<div class=\"claim-item\">" + 
+                createCitation(claims[i]) +
+                "</div>");
+         }
+         $('#claims').append(
+            '<h3 style="margin-top: 15px">Claim Log (JSON-LD)</h3>' +
+            `<div><a href="${thisClaimUrl}">${thisClaimUrl}</a></div>`
+         );
+
+        const template = await makeHTMLTemplate(artifactValue);
+      
+        if (template) {
+            $("#include").html(`
+            <h3>HTML Include</h3>
+            <p>Insert this code in your own web page to generate a claims list.</p>
+            <textarea id="template" rows="10"></textarea>
+            <p><a href="https://patrickhochstenbach.net/test/alsvanounds/">Demo</a></p>
+            `);
+            $("#template").text(template);
+        }
+      }
+      else {
+        $('#claims').append(`<i>${artifactValue} does not have claims yet</i>`);
+      }
+
+      return false;
+    });
+  });
+        </script>
+    </body>
+</html>

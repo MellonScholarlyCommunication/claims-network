@@ -32,10 +32,6 @@ make start
 
 ./mastodon.sh generate "https://nos.nl/artikel/2558648-kabinet-lobbyt-voor-nederlandse-vervanger-van-russische-kunstmest"
 
-## Export the claims
-
-docker run --rm hochstenbach/rdf-generator:v0.0.1
-
 ## Stop Docker Compose
 
 ```

@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://mycontributions.info/service/c/javascript/import_claims.js"></script>
+        <style type="text/css">
+           .claim-item {
+                font-family: Arial, Sans-serif;
+                margin-bottom: 8px;
+            }
+        </style>
+        <title>Demo</title>
+    </head>
+    <body>
+        <h1>Demo</h1>
+
+        <div id="claims"></div>
+
+        <script>
+            $(document).ready(async function() {
+                let artifact = 'DEMO_ARTIFACT';
+                const claims = await fetchClaims(artifact);
+                const thisClaimUrl = claimUrl(artifact);
+                if (claims) {
+                    for (let i = 0 ; i < claims.length ; i++) {
+                        $('#claims').append(
+                            "<div class=\"claim-item\">" + 
+                            createCitation(claims[i]) +
+                            "</div>");
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

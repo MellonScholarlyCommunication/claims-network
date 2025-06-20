@@ -22,7 +22,7 @@ services:
     image: hochstenbach/archiver-server:v0.0.1
     container_name: archiver-server
     ports:
-      - "3006:3006"
+      - "3007:3007"
     networks:
       - app-network
     volumes:
@@ -78,7 +78,7 @@ services:
       - app-network
 
   claimbot-server:
-    image: hochstenbach/claimbot-server:v0.0.1
+    image: hochstenbach/claimbot-server:v0.0.2
     container_name: claimbot-server
     environment:
       DEMO_MODE: NO_TOOTS
@@ -104,6 +104,23 @@ services:
       - ./claimbot-server/outbox:/app/outbox
     profiles:
       - claimbot
+  
+  claimlog-server:
+    image: hochstenbach/rdf-generator:v0.0.2
+    container_name: claimlog-server
+    depends_on:
+      - eventlog-server
+    ports:
+      - 3006:3006
+    networks:
+      - app-network
+    volumes:
+      - ./claimlog-server/error:/app/error
+      - ./claimlog-server/inbox:/app/inbox
+      - ./claimlog-server/tmp:/app/tmp
+      - ./claimlog-server/public:/app/public
+    profiles:
+      - claimlog
 
   proxy-server:
     image: nginx:alpine

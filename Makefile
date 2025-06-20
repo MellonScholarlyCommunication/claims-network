@@ -25,7 +25,7 @@ clean:
 	rm -f ./claimbot-server/error/* ; \
 	rm -f ./claimlog-server/inbox/* ; \
 	rm -f ./claimlog-server/error/* ; \
-	rm -f ./claimlog-server/tmp/* ; \
+	rm -rf ./claimlog-server/tmp/* ; \
 	rm -f ./metadata-server/inbox/* ; \
 	rm -f ./metadata-server/oubox/* ; \
 	rm -f ./metadata-server/error/* 

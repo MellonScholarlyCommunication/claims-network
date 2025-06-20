@@ -53,7 +53,7 @@ services:
       - base
 
   postgres:
-    image: postgres
+    image: postgres:16-bullseye
     container_name: postgres-server
     ports:
       - 5432:5432
@@ -69,7 +69,7 @@ services:
     image: hochstenbach/eventlog-server:v0.0.1
     container_name: eventlog-server
     environment:
-      POSTGRES_HOST: host.docker.internal
+      POSTGRES_HOST: ${POSTGRES_HOST}
     depends_on:
       - postgres
     ports:
@@ -84,11 +84,11 @@ services:
       DEMO_MODE: NO_TOOTS
       MASTODON_URL: ${MASTODON_URL}
       MASTODON_ACCESS_TOKEN: ${MASTODON_ACCESS_TOKEN}
-      WIKIJS_URL: http://host.docker.internal:3000
+      WIKIJS_URL: ${WIKIJS_URL}
       WIKIJS_ACCESS_TOKEN: ${WIKIJS_ACCESS_TOKEN}
-      VERIFICATION_URL: http://host.docker.internal
+      VERIFICATION_URL: ${VERIFICATION_URL}
       VERIFICATION: loose
-      POSTGRES_HOST: host.docker.internal
+      POSTGRES_HOST: ${POSTGRES_HOST}
     depends_on:
       - eventlog-server
     ports:
@@ -108,6 +108,8 @@ services:
   claimlog-server:
     image: hochstenbach/rdf-generator:v0.0.2
     container_name: claimlog-server
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
     depends_on:
       - eventlog-server
     ports:

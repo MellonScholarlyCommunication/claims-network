@@ -7,10 +7,10 @@ demo2:
 	cp ./data/demo2.jsonld ./claimbot-server/accepted
 
 start:
-	COMPOSE_PROFILES=base,archiver,claimbot,metadata,claimlog docker compose up
+	COMPOSE_PROFILES=base,claimbot,metadata,claimlog docker compose up
 
 start-dev:
-	COMPOSE_PROFILES=base,archiver,metadata,claimlog docker compose up
+	COMPOSE_PROFILES=base,metadata,claimlog docker compose up
 
 stop:
 	docker compose down	

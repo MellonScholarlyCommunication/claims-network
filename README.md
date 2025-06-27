@@ -32,6 +32,8 @@ make start
 
 ./mastodon.sh generate "https://nos.nl/artikel/2558648-kabinet-lobbyt-voor-nederlandse-vervanger-van-russische-kunstmest"
 
+./mastodon.sh generate "https://www.ugent.be/nl/actueel/vrouwvanmargaux.htm https://www.ugent.be/nl/actueel/zes-erc-advanced-grants.htm" 
+
 ## Stop Docker Compose
 
 ```
